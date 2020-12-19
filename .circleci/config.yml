@@ -1,5 +1,5 @@
 orbs:
-  heroku: circleci/heroku@0.0.10
+  heroku: circleci/heroku@1.2.3
   docker: circleci/docker@1.0.0
 version: 2.1
 workflows:
@@ -10,5 +10,4 @@ workflows:
           tag: 'latest'
   heroku_deploy:
     jobs:
-      - intall
-      - push-docker-image
+      - heroku/push-docker-image
