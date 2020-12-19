@@ -1,14 +1,42 @@
-orbs:
-  heroku: circleci/heroku@1.2.3
-  docker: circleci/docker@1.0.0
-version: 2.1
-workflows:
-  deploy:
-    jobs:
-      - docker/publish:
-          image: alexsuslin/docker-hy.github.io
-          tag: 'latest'
-      - heroku/push-docker-image:
-        requires:
-          - docker/publish
+version: 2
+jobs:
+  build:
+    machine: true
+
+    working_directory: ~/myapp
+
+    steps:
+      - checkout
+
+      - run:
+          name: Build Docker image
+          command: docker build -t alexsuslin/docker-hy.github.io
+
+      - run:
+        name: Push to DockerHub
+        command: |
+          docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+          docker push alexsuslin/docker-hy.github.io
+
+      - run:
+        name: Deploy to heroku
+        command: |
+          docker login --username=$HEROKU_LOGIN --password=$HEROKU_API_KEY registry.heroku.command
+          docker tag alexsuslin/docker-hy.github.io registry.heroku.com/$HEROKU_APP_NAME/web
+          docker push regitstry.heroku.com/$HEROKU_APP_NAME/web
+
+
+# orbs:
+#   heroku: circleci/heroku@1.2.3
+#   docker: circleci/docker@1.0.0
+# version: 2.1
+# workflows:
+#   deploy:
+#     jobs:
+#       - docker/publish:
+#           image: alexsuslin/docker-hy.github.io
+#           tag: 'latest'
+#       - heroku/push-docker-image:
+#         requires:
+#           - docker/publish
       
