@@ -1,5 +1,5 @@
 orbs:
-  deploy-to-heroku: betterdoc/deploy-to-heroku@4.2.0
+  heroku: circleci/heroku@1.2.3
   docker: circleci/docker@1.0.0
 version: 2.1
 workflows:
@@ -10,4 +10,4 @@ workflows:
           tag: 'latest'
   heroku_deploy:
     jobs:
-      - betterdoc/docker-build-release
+      - heroku/push-docker-image
