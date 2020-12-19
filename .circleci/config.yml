@@ -8,6 +8,7 @@ workflows:
       - docker/publish:
           image: alexsuslin/docker-hy.github.io
           tag: 'latest'
-  heroku_deploy:
-    jobs:
-      - heroku/push-docker-image
+      - heroku/push-docker-image:
+        requires:
+          - docker/publish
+      
