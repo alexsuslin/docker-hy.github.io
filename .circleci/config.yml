@@ -1,14 +1,3 @@
-jobs:
-  deploy:
-    executor: heroku/default
-    steps:
-      - checkout
-      - heroku/install
-      - run:
-          command: >
-            echo "The command above installs Heroku, the command below deploys.
-            What you do inbetween is up to you!"
-      - heroku/deploy-via-git
 orbs:
   heroku: circleci/heroku@0.0.10
   docker: circleci/docker@1.0.0
@@ -21,4 +10,5 @@ workflows:
           tag: 'latest'
   heroku_deploy:
     jobs:
-      - deploy
+      - intall
+      - push-docker-image
