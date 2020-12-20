@@ -24,19 +24,3 @@ jobs:
           docker login --username=$HEROKU_LOGIN --password=$HEROKU_API_KEY registry.heroku.command
           docker tag alexsuslin/docker-hy.github.io registry.heroku.com/$HEROKU_APP_NAME/web
           docker push regitstry.heroku.com/$HEROKU_APP_NAME/web
-
-
-# orbs:
-#   heroku: circleci/heroku@1.2.3
-#   docker: circleci/docker@1.0.0
-# version: 2.1
-# workflows:
-#   deploy:
-#     jobs:
-#       - docker/publish:
-#           image: alexsuslin/docker-hy.github.io
-#           tag: 'latest'
-#       - heroku/push-docker-image:
-#         requires:
-#           - docker/publish
-      
