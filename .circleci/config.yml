@@ -13,14 +13,14 @@ jobs:
           command: docker build -t alexsuslin/docker-hy.github.io
 
       - run:
-        name: Push to DockerHub
-        command: |
-          docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
-          docker push alexsuslin/docker-hy.github.io
+          name: Push to DockerHub
+          command: |
+            docker login -u $DOCKER_LOGIN -p $DOCKER_PASSWORD
+            docker push alexsuslin/docker-hy.github.io
 
       - run:
-        name: Deploy to heroku
-        command: |
-          docker login --username=$HEROKU_LOGIN --password=$HEROKU_API_KEY registry.heroku.command
-          docker tag alexsuslin/docker-hy.github.io registry.heroku.com/$HEROKU_APP_NAME/web
-          docker push regitstry.heroku.com/$HEROKU_APP_NAME/web
+          name: Deploy to heroku
+          command: |
+            docker login --username=$HEROKU_LOGIN --password=$HEROKU_API_KEY registry.heroku.command
+            docker tag alexsuslin/docker-hy.github.io registry.heroku.com/$HEROKU_APP_NAME/web
+            docker push regitstry.heroku.com/$HEROKU_APP_NAME/web
