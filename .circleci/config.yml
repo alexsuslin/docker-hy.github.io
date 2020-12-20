@@ -21,6 +21,6 @@ jobs:
       - run:
           name: Deploy to heroku
           command: |
-            echo "$HEROKU_API_KEY" | docker login --username $HEROKU_LOGIN --password-stdin registry.heroku.command
+            echo "$HEROKU_API_KEY" | docker login --username $HEROKU_LOGIN --password-stdin registry.heroku.com
             docker tag alexsuslin/docker-hy.github.io registry.heroku.com/$HEROKU_APP_NAME/web
             docker push registry.heroku.com/$HEROKU_APP_NAME/web
